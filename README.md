@@ -25,7 +25,7 @@ $ make install
 ###Step3 Download Files
 In our approach, we use URL to fetch the image. Thus, you need to download the COCO dtataset [annotations file](http://cocodataset.org/#download) to run our program. Please select the anotation files you want to work with and put them under the path *~/app/annotaions*
 
-We have implemented two methods to download the dataset. The first(default) method is to download the whole [dataset.zip](htt[://cocodataset.org/#download) corresponding to the annotation file. This method would parse the data faster at the expense of storing large amount data(~20GB) on the local side. After download the image file, please unzip it and put it under the dir *~/app/*
+We have implemented two methods to download the dataset. The first(default) method is to download the whole [dataset.zip](htt[://cocodataset.org/#download) corresponding to the annotation file. This method would parse the data faster at the expense of storing large amount data(typically 20GB) on the local side. After download the image file, please unzip it and put it under the dir *~/app/*
 
 The second approach is to download only the image you need via URL. We do not recommend this method as it would take long to complete since it fetches one image a time by posting HTML request and the round trip time is much longer than that of fetching data locally.However, if you have storage concern, please choose this method.
 
