@@ -17,7 +17,6 @@ COPY load.py /root/app/
 COPY combine_json.py /root/app/
 COPY convert_RGB.py /root/app/
 COPY mask_train_all.txt /root/app/
-COPY train_data /root/app/
 COPY tool /root/app/
 
 WORKDIR "/root/app"
