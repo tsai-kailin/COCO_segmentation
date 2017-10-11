@@ -55,5 +55,7 @@ COCO_segmentation
 ├── tool
 │   └── cocoapi*
 ├── run.sh
+├── combine_json.py
+├── convert_mask.py
 └── load.py
 ```
