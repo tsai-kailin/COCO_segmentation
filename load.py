@@ -12,7 +12,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 # select parsing file: train/val
-parser.add_argument('--fname', type=str, default='train2017', help='select which file (train or val)to parse')
+parser.add_argument('--fname', type=str, default='val2017', help='select which file (train or val)to parse')
 # select to parse which section of the input data
 parser.add_argument('--fid', type=int, default=0, nargs=1, help='section of the input file')
 # select fetching method
@@ -59,7 +59,7 @@ def parse_image(i, img, res):
 			if bbox[2] > 0 and bbox[3] > 0:
 				plt.imsave('{}_bbox/{}_bbox_{}_{}_{}.jpg'.format(data_name, data_name, i, anns[j]['image_id'], j), crop_img, format="jpg")
 				# append segmentatin info to the mask_list
-				new_mask = {u'image_id': anns[j]['image_id'], u'category_id': 1, u'segmentation': crop_anns, u'sub_id': j}
+				new_mask = {u'top_id': i,u'image_id': anns[j]['image_id'], u'category_id': 1, u'segmentation': crop_anns, u'sub_id': j}
 				mask_list.append(new_mask.copy())
 #				mask_list[count] = new_mask
 #				add_one()
@@ -118,7 +118,7 @@ end = min((file_id+1)*5000, num_of_image)
 #process each image
 #for i in range(0, num_of_image):
 for i in range(file_id*5000, end):
-	print "retrieve image: {}/{} ".format(i, num_of_image)
+	print ("retrieve image: {}/{} ".format(i, num_of_image))
 	img = coco.loadImgs(imgIds[i])[0]
 	if args.m == 'url':
 	# load img from url
@@ -127,9 +127,9 @@ for i in range(file_id*5000, end):
 			parse_image(i, img, res)
 		except urllib2.HTTPError as err:
 			if err.code == 404:
-				print "page not found"
+				print ("page not found")
 			else:
-				print "something happened! Error Code:", err.code
+				print ("something happened! Error Code:", err.code)
 	else:			
 	# load img from local side
 		with open ('%s/%s/%s'%(dataDir,data_name,img['file_name'])) as img_file:
@@ -137,6 +137,6 @@ for i in range(file_id*5000, end):
 	
 	if i % 300 == 299:
 		update_json(mask_list)
-		ask_list = []
+		mask_list = []
 
 update_json(mask_list)

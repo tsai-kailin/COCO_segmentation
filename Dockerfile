@@ -15,8 +15,8 @@ RUN  pip install \
 RUN mkdir /root/app  
 COPY load.py /root/app/
 COPY combine_json.py /root/app/
-COPY convert_RGB.py /root/app/
-COPY mask_train_all.txt /root/app/
+COPY convert_mask.py /root/app/
+COPY mask_val2017_all.txt /root/app/
 COPY tool /root/app/
 
 WORKDIR "/root/app"
