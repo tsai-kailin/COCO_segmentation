@@ -12,17 +12,17 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 # select parsing file: train/val
-parser.add_argument('--fname', type=str, default='train', required=True, help='select which file (train or val)to parse')
+parser.add_argument('--fname', type=str, default='train2017', help='select which file (train or val)to parse')
 # select to parse which section of the input data
 parser.add_argument('--fid', type=int, default=0, nargs=1, help='section of the input file')
-
+# select fetching method
+parser.add_argument('--m', type=str, default='local', help='select fetching data method(default:local). local: use local images,url: download images via URL')
 
 args = parser.parse_args()
 data_name = args.fname
 file_id = args.fid[0]
 dataDir = '.'
-dataType = '{}2017'.format(data_name)
-annFile = '{}/annotations/instances_{}.json'.format(dataDir,dataType)
+annFile = '{}/annotations/instances_{}.json'.format(dataDir,data_name)
 
 # create dir if not existed
 def make_sure_path_exists(path):
@@ -120,21 +120,23 @@ end = min((file_id+1)*5000, num_of_image)
 for i in range(file_id*5000, end):
 	print "retrieve image: {}/{} ".format(i, num_of_image)
 	img = coco.loadImgs(imgIds[i])[0]
+	if args.m == 'url':
 	# load img from url
-#	try:
-#		res = urllib2.urlopen(img['coco_url'])
-#		parse_image(i, img, res)
-#	except urllib2.HTTPError as err:
-#		if err.code == 404:
-#			print "page not found"
-#		else:
-#			print "something happened! Error Code:", err.code
-			
-	# load and display image
-	with open ('%s/%s/%s'%(dataDir,dataType,img['file_name'])) as img_file:
-		parse_image(i, img, img_file)
+		try:
+			res = urllib2.urlopen(img['coco_url'])
+			parse_image(i, img, res)
+		except urllib2.HTTPError as err:
+			if err.code == 404:
+				print "page not found"
+			else:
+				print "something happened! Error Code:", err.code
+	else:			
+	# load img from local side
+		with open ('%s/%s/%s'%(dataDir,data_name,img['file_name'])) as img_file:
+			parse_image(i, img, img_file)
+	
 	if i % 300 == 299:
 		update_json(mask_list)
-		mask_list = []
+		ask_list = []
 
 update_json(mask_list)
