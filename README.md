@@ -1,5 +1,5 @@
 # COCO_segmentation
-
+![image](https://user-images.githubusercontent.com/22560872/31424646-f71db4ca-ae8d-11e7-95a0-76774bc2091d.png)
 ## Currently supported function:
 1. Fetch the raw data
 2. Get the bounding box
@@ -55,5 +55,7 @@ COCO_segmentation
 ├── tool
 │   └── cocoapi*
 ├── run.sh
+├── combine_json.py
+├── convert_mask.py
 └── load.py
 ```
