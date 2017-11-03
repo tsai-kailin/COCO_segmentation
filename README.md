@@ -6,7 +6,7 @@
 3. Get the segmentation data(.json)
 
 ## Installation
-###Step 1 Docker file
+### Step 1 Docker file
 This program is currently developed under docker
 To run the program in you need to install the [Docker](https://www.docker.com/) and the [tensorflow Docker file(gpu version)](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/docker)
 ```
@@ -16,7 +16,7 @@ $ sudo docker build -t=[your-name/image-name] .
 # run the program in docker
 $ sudo nvidia-docker run --rm -it --volume [/path/ you want to work under(in your computer)]:[/path in side the docker/] [your-name/image-name]
 ```
-###Step2 Download Files
+### Step2 Download Files
 In our approach, we use URL to fetch the image. Thus, you need to download the COCO dtataset [annotations file](https://cocodataset.org/#download) to run our program. Please select the anotation files you want to work with and put them under the path *~/app/annotaions*
 
 We have implemented two methods to download the dataset. The first(default) method is to download the whole [dataset.zip](https://cocodataset.org/#download) corresponding to the annotation file. This method would parse the data faster at the expense of storing large amount data(typically 20GB) on the local side. After download the image file, please unzip it and put it under the dir *~/app/*
@@ -27,7 +27,7 @@ The second approach is to download only the image you need via URL. We do not re
 $ python load.py --m ['local/url']
 ```
 
-###Step4 Run the Program
+### Step3 Run the Program
 Our default anootation file is *instances_val2017.json*.
 execute the program
 ```
