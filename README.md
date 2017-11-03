@@ -16,13 +16,7 @@ $ sudo docker build -t=[your-name/image-name] .
 # run the program in docker
 $ sudo nvidia-docker run --rm -it --volume [/path/ you want to work under(in your computer)]:[/path in side the docker/] [your-name/image-name]
 ```
-###Step2 Install COCOAPI
-When you first acess the Docker, your will find yourself in the directory called "app"  
-```
-$ cd cocoapi/PythonAPI
-$ make install
-```
-###Step3 Download Files
+###Step2 Download Files
 In our approach, we use URL to fetch the image. Thus, you need to download the COCO dtataset [annotations file](https://cocodataset.org/#download) to run our program. Please select the anotation files you want to work with and put them under the path *~/app/annotaions*
 
 We have implemented two methods to download the dataset. The first(default) method is to download the whole [dataset.zip](https://cocodataset.org/#download) corresponding to the annotation file. This method would parse the data faster at the expense of storing large amount data(typically 20GB) on the local side. After download the image file, please unzip it and put it under the dir *~/app/*
@@ -52,10 +46,10 @@ $ python load.py --fname val2017 --fid 0 --m local
 ```
 COCO_segmentation
 ├── Dockerfile
-├── tool
-│   └── cocoapi*
 ├── run.sh
+├── mask_val2017_all.txt // sample output: 'person' instance annotation file of val2017 
 ├── combine_json.py
+├── mean_iou.py
 ├── convert_mask.py
 └── load.py
 ```
